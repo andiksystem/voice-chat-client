@@ -26,12 +26,10 @@ public class RecorderThread extends Thread {
 
     @Override
     public void run() {
-        int i = 0;
         while (VoiceChatClient.isCalling()) {
             try {
                 audioIn.read(byteBuffers, 0, byteBuffers.length);
                 DatagramPacket data = new DatagramPacket(byteBuffers, byteBuffers.length, serverIp, serverPort);
-                System.out.println("send #" + i++);
                 datagramSocket.send(data);   
             } catch (IOException ex) {
                 Logger.getLogger(RecorderThread.class.getName()).log(Level.SEVERE, null, ex);
